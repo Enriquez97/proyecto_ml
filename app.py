@@ -148,12 +148,15 @@ if page == "Predicción (Consumir Modelo)":
 
             with r_col1:
                 st.subheader("Resultado de la Predicción")
-                if prediction == 1:
-                    st.error("⚠️ **Alto Riesgo de Abandono**")
-                    st.markdown(f"Es probable que este cliente abandone el servicio.")
-                else:
+                if prediction_proba < 0.4:
                     st.success("✅ **Bajo Riesgo de Abandono**")
                     st.markdown(f"Es probable que este cliente se quede.")
+                elif prediction_proba < 0.7:
+                    st.warning("⚠️ **Riesgo Medio de Abandono**")
+                    st.markdown(f"El riesgo de abandono es moderado. Se recomienda seguimiento.")
+                else:
+                    st.error("🚨 **Alto Riesgo de Abandono**")
+                    st.markdown(f"Es muy probable que este cliente abandone el servicio.")
                     
             with r_col2:
                 st.subheader("Probabilidad")
